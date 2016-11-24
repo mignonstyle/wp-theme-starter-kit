@@ -1,0 +1,27 @@
+{
+    "name": "mignonstyle/wp-theme-starter-kit",
+    "description": "Project starter kit for WordPress theme development",
+    "authors": [
+        {
+            "name": "Mignon Style"
+        }
+    ],
+    "license": "GPLv2",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^2.6",
+        "wp-coding-standards/wpcs": "^0.10.0",
+        "phpmd/phpmd": "@stable"
+    },
+    "require": {},
+    "scripts" :{
+        "post-install-cmd": [
+            "php vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/"
+        ],
+        "post-update-cmd": [
+            "php vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/"
+        ],
+        "test": [
+            "php vendor/bin/phpcs -p -s -v -n . --standard=./rulesets/codesniffer.ruleset.xml --extensions=php"
+        ]
+    }
+}
