@@ -27,7 +27,7 @@ env:
     # WP_MULTISITE = whether to test multisite (use either "0" or "1")
     # @link https://github.com/WordPress/WordPress
     - WP_VERSION=master WP_MULTISITE=0
-    # - WP_VERSION=master WP_MULTISITE=1
+    - WP_VERSION=master WP_MULTISITE=1
     # - WP_VERSION=4.6 WP_MULTISITE=0
     # - WP_VERSION=4.6 WP_MULTISITE=1
 
@@ -42,9 +42,9 @@ branches:
 cache:
     directories:
         - node_modules # NPM packages
-        - vendor
+        - vendor # composer
 
-# Use this to prepare your build for testing.
+# Grab the setup script and execute.
 before_script:
     # bash ./bin/build.sh
     - npm install
@@ -59,7 +59,7 @@ script:
     - composer test
 
 # Execute script on success
-after_success: bash ./bin/deploy.sh
+after_script: bash ./bin/deploy.sh
 
 # Receive notifications for build results.
 # @link http://docs.travis-ci.com/user/notifications/#Email-notifications
