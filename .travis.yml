@@ -47,9 +47,9 @@ cache:
 # Grab the setup script and execute.
 before_script:
     # bash ./bin/build.sh
-    - npm install
+    # - npm install
     - composer install
-    - npm run build
+    # - npm run build
 
 # Run test script commands.
 # Default is specific to project language.
