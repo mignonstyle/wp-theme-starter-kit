@@ -111,6 +111,6 @@ gulp.task( 'default', [
     'scss',
     'js',
     'js-min',
-    'watch'
+    //'watch'
     ], function() {
 } );
