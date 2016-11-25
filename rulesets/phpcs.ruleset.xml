@@ -10,12 +10,13 @@
     <rule ref="WordPress">
         <exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect" />
         <exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact" />
-        <!--
+
+        <exclude name="Generic.Commenting.DocComment" />
+        <exclude name="Squiz.Commenting.FileComment" />
         <exclude name="Squiz.Commenting.ClassComment" />
         <exclude name="Squiz.Commenting.FunctionComment" />
-        <exclude name="Generic.Commenting.DocComment" />
+
         <exclude name="WordPress.VIP" />
-        -->
     </rule>
 
     <exclude-pattern>*/vendor/*</exclude-pattern>

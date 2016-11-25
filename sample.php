@@ -5,4 +5,9 @@
 	 * @package wp-theme-starter-kit
 	 */
 
-	echo 'Hello World';
+	 class Main {
+		function _construct() {
+			ech 'hoge';
+			$hoge = 'hoge';
+		}
+	}

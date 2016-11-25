@@ -45,10 +45,10 @@ cache:
         - vendor # composer
 
 # Grab the setup script and execute.
-before_script:
+before_script: bash ./bin/setup.sh
+
     # bash ./bin/build.sh
     # - npm install
-    - composer install
     # - npm run build
 
 # Run test script commands.
