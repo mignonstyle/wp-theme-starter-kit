@@ -5,9 +5,9 @@
 	 * @package wp-theme-starter-kit
 	 */
 
-	 class main {
+	 class Main {
 		function _construct() {
-			ech 'hoge';
-			$hoge ==== 'hoge';
+			echo 'hoge';
+			$hoge = 'hoge';
 		}
 	}
