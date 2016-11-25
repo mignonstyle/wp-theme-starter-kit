@@ -8,6 +8,5 @@
 	 class Main {
 		function _construct() {
 			echo 'hoge';
-			$hoge = 'hoge';
 		}
 	}
