@@ -13,7 +13,8 @@ var gulp         = require('gulp'),
 	concat       = require('gulp-concat'),
 	uglify       = require('gulp-uglify'),
 	watch        = require('gulp-watch'),
-	plumber      = require('gulp-plumber');
+	plumber      = require('gulp-plumber'),
+	browserSync  = require( 'browser-sync' );
 
 
 
@@ -27,7 +28,7 @@ var gulp         = require('gulp'),
 
 //
 //var requireDir   = require( 'require-dir' );
-// var browserSync  = require( 'browser-sync' );
+
 
 // ------------------------------------------------
 // Auto-polyfill
@@ -48,7 +49,7 @@ var browsers = [
 // ------------------------------------------------
 var paths = {
 	// base paths
-	// "phpSrc": "./**/*.php",
+	"phpSrc": "./**/*.php",
 
 	// scss
 	"scssSrc": "./src/scss/**/*.scss",
@@ -71,7 +72,7 @@ var paths = {
 // ------------------------------------------------
 // BrowserSync
 // ------------------------------------------------
-/*
+
 gulp.task( 'browser-sync', function() {
 	browserSync.init( {
 		proxy : "http://vccw-test.dev/",
@@ -83,7 +84,7 @@ gulp.task( 'browser-sync', function() {
 gulp.task( 'bs-reload', function() {
 	browserSync.reload();
 } );
-*/
+
 // ------------------------------------------------
 // Sass Tasks
 // ------------------------------------------------
@@ -169,10 +170,12 @@ gulp.task( 'watch', [
 */
 gulp.task('watch', [
 		'scss',
-		'js'
+		'js',
+		'browser-sync',
 	], function(){
-		gulp.watch([paths.scssSrc], ['scss']);
-		gulp.watch([paths.jsSrc], ['js']);
+		gulp.watch([paths.phpSrc], ['bs-reload']);
+		gulp.watch([paths.scssSrc], ['scss', 'bs-reload']);
+		gulp.watch([paths.jsSrc], ['js', 'bs-reload']);
 });
 
 gulp.task('default', [
@@ -191,15 +194,3 @@ gulp.task( 'default', [
 	//'watch'
 	], function() {
 } );
-*/
-// ------------------------------------------------
-// Test Tasks
-// ------------------------------------------------
-/*
-gulp.task( 'test:sass', function() {
-	return gulp.src( paths.scssSrc )
-		.pipe( sassLint() )
-		.pipe( sassLint.format() )
-		.pipe( sassLint.failOnError() )
-} );
-*/
