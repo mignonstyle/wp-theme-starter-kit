@@ -6,8 +6,6 @@ var gulp         = require('gulp'),
 	sassLint     = require('gulp-sass-lint'),
 	rename       = require('gulp-rename'),
 	csso         = require('gulp-csso');
-	//postcss      = require('gulp-postcss');
-	//autoprefixer = require('autoprefixer');
 
 // var watch        = require( 'gulp-watch' );
 
@@ -19,14 +17,6 @@ var gulp         = require('gulp'),
 // var uglify       = require( 'gulp-uglify' );
 //var requireDir   = require( 'require-dir' );
 // var browserSync  = require( 'browser-sync' );
-
-// ------------------------------------------------
-// Browsers setting (autoprefixer)
-// ------------------------------------------------
-var browsers = [
-	'last 2 versions',
-	'> 2%'
-];
 
 // ------------------------------------------------
 // Paths setting
@@ -79,13 +69,6 @@ gulp.task('scss', function(){
 		.pipe(sassLint.failOnError())
 
 		.pipe(sass())
-		/*
-		.pipe(postcss([
-			require('autoprefixer')({
-				browsers: browsers
-			})
-		]))
-		*/
 		.pipe(gulp.dest(paths.scssDir))
 
 		// add minify
