@@ -6,8 +6,8 @@ var gulp         = require('gulp'),
 	sassLint     = require('gulp-sass-lint'),
 	rename       = require('gulp-rename'),
 	csso         = require('gulp-csso'),
-	postcss      = require('gulp-postcss'),
-	autoprefixer = require('autoprefixer');
+	postcss      = require('gulp-postcss');
+	//autoprefixer = require('autoprefixer');
 
 // var watch        = require( 'gulp-watch' );
 
@@ -24,7 +24,8 @@ var gulp         = require('gulp'),
 // Browsers setting (autoprefixer)
 // ------------------------------------------------
 var browsers = [
-	'last 2 versions'
+	'last 2 versions',
+	'> 2%'
 ];
 
 // ------------------------------------------------
@@ -79,7 +80,9 @@ gulp.task('scss', function(){
 
 		.pipe(sass())
 		.pipe(postcss([
-			autoprefixer({browsers: browsers})
+			require('autoprefixer')({
+				browsers: browsers
+			})
 		]))
 		.pipe(gulp.dest(paths.scssDir))
 
