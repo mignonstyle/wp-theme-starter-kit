@@ -10,9 +10,9 @@ language: php
 
 # Declare versions of PHP to use. Use one decimal max.
 php:
-    - 7.0
-    - 5.6
-    - 5.3
+  - 7.0
+  - 5.6
+  - 5.3
 
 # Ditch sudo and use containers.
 # @link http://docs.travis-ci.com/user/migrating-from-legacy/#Why-migrate-to-container-based-infrastructure%3F
@@ -22,41 +22,41 @@ sudo: false
 # Define environment variables.
 # @link https://docs.travis-ci.com/user/environment-variables/
 env:
-    # Specify versions of WordPress to test against.
-    # WP_VERSION = WordPress version number (use "master" for SVN trunk)
-    # WP_MULTISITE = whether to test multisite (use either "0" or "1")
-    # @link https://github.com/WordPress/WordPress
-    - WP_VERSION=master WP_MULTISITE=0
-    - WP_VERSION=master WP_MULTISITE=1
-    # - WP_VERSION=4.6 WP_MULTISITE=0
-    # - WP_VERSION=4.6 WP_MULTISITE=1
+  # Specify versions of WordPress to test against.
+  # WP_VERSION = WordPress version number (use "master" for SVN trunk)
+  # WP_MULTISITE = whether to test multisite (use either "0" or "1")
+  # @link https://github.com/WordPress/WordPress
+  - WP_VERSION=master WP_MULTISITE=0
+  - WP_VERSION=master WP_MULTISITE=1
+  # - WP_VERSION=4.6 WP_MULTISITE=0
+  # - WP_VERSION=4.6 WP_MULTISITE=1
 
 # Specify which branches to build using a safelist, or blocklist branches that you do not want to be built:
 # @link https://docs.travis-ci.com/user/customizing-the-build
 branches:
-    only:
-        - master
+  only:
+    - master
 
 # You can cache arbitrary directories.
 # @link https://docs.travis-ci.com/user/caching/
 cache:
-    directories:
-        - node_modules # NPM packages
-        - vendor # composer
+  directories:
+    - node_modules # NPM packages
+    - vendor # composer
 
 # Grab the setup script and execute.
 before_script: bash ./bin/setup.sh
 
-    # bash ./bin/build.sh
-    # - npm install
-    # - npm run build
+  # bash ./bin/build.sh
+  # - npm install
+  # - npm run build
 
 # Run test script commands.
 # Default is specific to project language.
 # All commands must exit with code 0 on success. Anything else is considered failure.
 script:
-    - ls -al style.css
-    - composer test
+  - ls -al style.css
+  - composer test
 
 # Execute script on success
 after_script: bash ./bin/deploy.sh
@@ -64,4 +64,4 @@ after_script: bash ./bin/deploy.sh
 # Receive notifications for build results.
 # @link http://docs.travis-ci.com/user/notifications/#Email-notifications
 notifications:
-    email: false
+  email: false

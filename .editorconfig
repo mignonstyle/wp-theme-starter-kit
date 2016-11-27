@@ -4,9 +4,6 @@
 # WordPress Coding Standards
 # https://make.wordpress.org/core/handbook/coding-standards/
 
-# Author: Mignon Style
-# version: 1.1
-
 root = true
 
 [*]
@@ -15,15 +12,18 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 indent_style = tab
-indent_size = 4
 
-[{*.css, *.php}]
+[{*.php, *.html}}]
 indent_style = tab
-indent_size = 4
+indent_size  = 4
 
-[{.jshintrc,*.json,*.yml,*.xml}]
+[{*.scss,*.css}]
 indent_style = space
-indent_size = 4
+indent_size  = 4
+
+[{.jshintrc,*.json,*.yml}]
+indent_style = space
+indent_size  = 2
 
 [{*.txt,wp-config-sample.php}]
 end_of_line = crlf

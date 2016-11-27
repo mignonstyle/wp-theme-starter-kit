@@ -1,0 +1,9 @@
+/*
+ * common style
+ */
+.test .test-heading {
+  font-size: 20px;
+  font-weight: bold; }
+
+.test .test-content {
+  padding: 15px; }
