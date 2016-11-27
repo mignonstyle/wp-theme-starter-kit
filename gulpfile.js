@@ -7,10 +7,10 @@ var gulp         = require('gulp'),
 	rename       = require('gulp-rename'),
 	csso         = require('gulp-csso'),
 	postcss      = require('gulp-postcss'),
-	autoprefixer = require('autoprefixer');
+	autoprefixer = require('autoprefixer'),
+	doiuse       = require('doiuse');
 
-// Auto-polyfill
-require('es6-promise').polyfill();
+
 
 
 
@@ -26,6 +26,12 @@ require('es6-promise').polyfill();
 // var browserSync  = require( 'browser-sync' );
 
 // ------------------------------------------------
+// Auto-polyfill
+// Corrective action due to travis error in autoprefixer.
+// ------------------------------------------------
+require('es6-promise').polyfill();
+
+// ------------------------------------------------
 // Browsers setting
 // ------------------------------------------------
 var browsers = [
@@ -36,7 +42,6 @@ var browsers = [
 // ------------------------------------------------
 // Paths setting
 // ------------------------------------------------
-
 var paths = {
 	// base paths
 	// "phpSrc": "./**/*.php",
@@ -85,6 +90,13 @@ gulp.task('scss', function(){
 
 		.pipe(sass())
 		.pipe(postcss([
+			doiuse({
+				browsers: browsers,
+				// CSS3 2D Transforms not supported by Opera Mini.
+				ignore: ['transforms2d', 'rem'],
+				// an optional array of file globs to match against original source file path, to ignore
+				ignoreFiles: ['**/normalize.scss']
+			}),
 			autoprefixer({browsers: browsers})
 		]))
 		.pipe(gulp.dest(paths.scssDir))
@@ -143,7 +155,7 @@ gulp.task('watch', function(){
 
 gulp.task('default', [
 		'scss',
-		//'watch',
+		'watch',
 	],
 	function(){
 });
