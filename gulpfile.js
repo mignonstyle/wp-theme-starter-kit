@@ -1,12 +1,13 @@
 // $ npm install --save-dev gulp
 // $ npm run build
 
-var gulp         = require( 'gulp' ),
-	sass         = require( 'gulp-sass' ),
-	sassLint     = require( 'gulp-sass-lint' ),
-	rename       = require( 'gulp-rename' ),
-	csso         = require( 'gulp-csso' );
-	// postcss      = require( 'gulp-postcss' );
+var gulp         = require('gulp'),
+	sass         = require('gulp-sass'),
+	sassLint     = require('gulp-sass-lint'),
+	rename       = require('gulp-rename'),
+	csso         = require('gulp-csso'),
+	postcss      = require('gulp-postcss'),
+	autoprefixer = require('autoprefixer');
 
 // var watch        = require( 'gulp-watch' );
 
@@ -18,6 +19,13 @@ var gulp         = require( 'gulp' ),
 // var uglify       = require( 'gulp-uglify' );
 //var requireDir   = require( 'require-dir' );
 // var browserSync  = require( 'browser-sync' );
+
+// ------------------------------------------------
+// Browsers setting (autoprefixer)
+// ------------------------------------------------
+var browsers = [
+	'last 2 versions'
+];
 
 // ------------------------------------------------
 // Paths setting
@@ -63,22 +71,25 @@ gulp.task( 'bs-reload', function() {
 // ------------------------------------------------
 // Sass Tasks
 // ------------------------------------------------
-gulp.task( 'scss', function() {
-	return gulp.src( paths.scssSrc )
-		.pipe( sassLint() )
-		.pipe( sassLint.format() )
-		.pipe( sassLint.failOnError() )
+gulp.task('scss', function(){
+	return gulp.src(paths.scssSrc)
+		.pipe(sassLint())
+		.pipe(sassLint.format())
+		.pipe(sassLint.failOnError())
 
-		.pipe( sass() )
-		.pipe( gulp.dest( paths.scssDir ) )
+		.pipe(sass())
+		.pipe(postcss([
+			autoprefixer({browsers: browsers})
+		]))
+		.pipe(gulp.dest(paths.scssDir))
 
 		// add minify
-		.pipe( rename( {
+		.pipe(rename({
 			suffix: '.min'
-		} ) )
-		.pipe( csso() )
-		.pipe( gulp.dest( paths.scssDir ) );
-} );
+		}))
+		.pipe(csso())
+		.pipe(gulp.dest(paths.scssDir));
+});
 
 // ------------------------------------------------
 // JS Tasks
@@ -120,16 +131,16 @@ gulp.task( 'watch', [
 	} );
 } );
 */
-gulp.task( 'watch', function() {
-	return gulp.watch( [paths.scssSrc], ['scss'] );
-} );
+gulp.task('watch', function(){
+	return gulp.watch([paths.scssSrc], ['scss']);
+});
 
-gulp.task( 'default', [
+gulp.task('default', [
 		'scss',
-		//'watch',
+		'watch',
 	],
-	function() {
-} );
+	function(){
+});
 
 /*
 gulp.task( 'default', [
