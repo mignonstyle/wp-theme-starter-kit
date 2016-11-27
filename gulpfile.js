@@ -11,19 +11,20 @@ var gulp         = require('gulp'),
 	doiuse       = require('doiuse'),
 	mqpacker     = require('css-mqpacker'),
 	concat       = require('gulp-concat'),
-	uglify       = require('gulp-uglify');
+	uglify       = require('gulp-uglify'),
+	watch        = require('gulp-watch'),
+	plumber      = require('gulp-plumber');
 
 
 
 
 
-// var watch        = require( 'gulp-watch' );
 
 
 //var path         = require( 'path' );
 //var changed      = require( 'gulp-changed' );
-// var
-//var plumber      = require( 'gulp-plumber' );
+
+
 //
 //var requireDir   = require( 'require-dir' );
 // var browserSync  = require( 'browser-sync' );
@@ -120,12 +121,14 @@ gulp.task('scss', function(){
 
 gulp.task('js-concat', function(){
 	return gulp.src(paths.jsSrc)
+		.pipe(plumber())
 		.pipe(concat('main.js'))
 		.pipe(gulp.dest(paths.jsDir));
 });
 
 gulp.task('js-min', ['js-concat'], function(){
 	return gulp.src(paths.jsSrc)
+		.pipe(plumber())
 		.pipe(uglify({preserveComments: 'license'}))
 		.pipe(concat('main.min.js'))
 		.pipe(gulp.dest(paths.jsDir));
