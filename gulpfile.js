@@ -5,8 +5,8 @@ var gulp         = require('gulp'),
 	sass         = require('gulp-sass'),
 	sassLint     = require('gulp-sass-lint'),
 	rename       = require('gulp-rename'),
-	csso         = require('gulp-csso'),
-	postcss      = require('gulp-postcss');
+	csso         = require('gulp-csso');
+	//postcss      = require('gulp-postcss');
 	//autoprefixer = require('autoprefixer');
 
 // var watch        = require( 'gulp-watch' );
@@ -79,11 +79,13 @@ gulp.task('scss', function(){
 		.pipe(sassLint.failOnError())
 
 		.pipe(sass())
+		/*
 		.pipe(postcss([
 			require('autoprefixer')({
 				browsers: browsers
 			})
 		]))
+		*/
 		.pipe(gulp.dest(paths.scssDir))
 
 		// add minify
