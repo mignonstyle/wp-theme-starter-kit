@@ -1,21 +1,8 @@
 /*
  * common style
  */
-
-.test {
-    .test-heading {
-        font-size: 20px;
-        font-weight: bold;
-    }
-    .test-content {
-        padding: 15px;
-    }
-    .test-footer {
-
-    }
-    .a {
-        &:hover {
-            transform: scale(1.2);
-        }
+.a {
+    &:hover {
+        transform: scale(1.2);
     }
 }

@@ -5,7 +5,9 @@ var gulp         = require('gulp'),
 	sass         = require('gulp-sass'),
 	sassLint     = require('gulp-sass-lint'),
 	rename       = require('gulp-rename'),
-	csso         = require('gulp-csso');
+	csso         = require('gulp-csso'),
+	postcss      = require('gulp-postcss'),
+	autoprefixer = require('autoprefixer');
 
 // var watch        = require( 'gulp-watch' );
 
@@ -17,6 +19,14 @@ var gulp         = require('gulp'),
 // var uglify       = require( 'gulp-uglify' );
 //var requireDir   = require( 'require-dir' );
 // var browserSync  = require( 'browser-sync' );
+
+// ------------------------------------------------
+// Browsers setting
+// ------------------------------------------------
+var browsers = [
+	'last 2 version',
+	'> 3%'
+];
 
 // ------------------------------------------------
 // Paths setting
@@ -69,6 +79,9 @@ gulp.task('scss', function(){
 		.pipe(sassLint.failOnError())
 
 		.pipe(sass())
+		.pipe(postcss([
+			autoprefixer({browsers: browsers})
+		]))
 		.pipe(gulp.dest(paths.scssDir))
 
 		// add minify
@@ -125,7 +138,7 @@ gulp.task('watch', function(){
 
 gulp.task('default', [
 		'scss',
-		// 'watch',
+		//'watch',
 	],
 	function(){
 });
