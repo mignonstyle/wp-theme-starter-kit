@@ -10,7 +10,8 @@ var gulp         = require('gulp'),
 	autoprefixer = require('autoprefixer'),
 	doiuse       = require('doiuse'),
 	mqpacker     = require('css-mqpacker'),
-	concat       = require( 'gulp-concat' );
+	concat       = require('gulp-concat'),
+	uglify       = require('gulp-uglify');
 
 
 
@@ -23,7 +24,7 @@ var gulp         = require('gulp'),
 //var changed      = require( 'gulp-changed' );
 // var
 //var plumber      = require( 'gulp-plumber' );
-// var uglify       = require( 'gulp-uglify' );
+//
 //var requireDir   = require( 'require-dir' );
 // var browserSync  = require( 'browser-sync' );
 
@@ -117,19 +118,21 @@ gulp.task('scss', function(){
 // JS Tasks
 // ------------------------------------------------
 
-gulp.task( 'js', function() {
-	return gulp.src( paths.jsSrc )
-		.pipe( concat( 'main.js' ) )
-		.pipe( gulp.dest( paths.jsDir ) );
-} );
-/*
-gulp.task( 'js-min', ['js'], function() {
-	return gulp.src( paths.jsSrc )
-		.pipe( uglify( {preserveComments: 'license'} ) )
-		.pipe( concat( 'main.min.js' ) )
-		.pipe( gulp.dest( paths.jsDir ) );
-} );
-*/
+gulp.task('js-concat', function(){
+	return gulp.src(paths.jsSrc)
+		.pipe(concat('main.js'))
+		.pipe(gulp.dest(paths.jsDir));
+});
+
+gulp.task('js-min', ['js-concat'], function(){
+	return gulp.src(paths.jsSrc)
+		.pipe(uglify({preserveComments: 'license'}))
+		.pipe(concat('main.min.js'))
+		.pipe(gulp.dest(paths.jsDir));
+});
+
+gulp.task('js', ['js-concat', 'js-min']);
+
 // ------------------------------------------------
 // Gulp Tasks
 // ------------------------------------------------
