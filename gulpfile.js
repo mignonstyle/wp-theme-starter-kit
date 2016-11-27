@@ -180,7 +180,7 @@ gulp.task('watch', [
 
 gulp.task('default', [
 		'scss',
-		'js',
+		'js'
 		//'watch',
 	],
 	function(){
@@ -194,3 +194,4 @@ gulp.task( 'default', [
 	//'watch'
 	], function() {
 } );
+*/
