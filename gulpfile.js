@@ -89,11 +89,19 @@ gulp.task( 'bs-reload', function() {
 // ------------------------------------------------
 gulp.task('scss', function(){
 	return gulp.src(paths.scssSrc)
+		.pipe(plumber({
+			errorHandler: function(err){
+				console.log(err.messageFormatted);
+				this.emit('end');
+			}
+		}))
+
 		.pipe(sassLint())
 		.pipe(sassLint.format())
 		.pipe(sassLint.failOnError())
 
 		.pipe(sass())
+
 		.pipe(postcss([
 			doiuse({
 				browsers: browsers,
@@ -159,8 +167,12 @@ gulp.task( 'watch', [
 	} );
 } );
 */
-gulp.task('watch', function(){
-	return gulp.watch([paths.scssSrc], ['scss']);
+gulp.task('watch', [
+		'scss',
+		'js'
+	], function(){
+		gulp.watch([paths.scssSrc], ['scss']);
+		gulp.watch([paths.jsSrc], ['js']);
 });
 
 gulp.task('default', [
