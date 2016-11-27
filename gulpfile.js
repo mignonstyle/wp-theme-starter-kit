@@ -9,6 +9,11 @@ var gulp         = require('gulp'),
 	postcss      = require('gulp-postcss'),
 	autoprefixer = require('autoprefixer');
 
+// Auto-polyfill
+require('es6-promise').polyfill();
+
+
+
 // var watch        = require( 'gulp-watch' );
 
 
