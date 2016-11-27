@@ -120,9 +120,17 @@ gulp.task( 'watch', [
 	} );
 } );
 */
-gulp.task( 'default', function() {
+gulp.task( 'watch', function() {
 	return gulp.watch( [paths.scssSrc], ['scss'] );
 } );
+
+gulp.task( 'default', [
+		'scss',
+		'watch',
+	],
+	function() {
+} );
+
 /*
 gulp.task( 'default', [
 	'scss',
