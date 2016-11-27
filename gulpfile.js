@@ -137,7 +137,7 @@ gulp.task('watch', function(){
 
 gulp.task('default', [
 		'scss',
-		'watch',
+		//'watch',
 	],
 	function(){
 });
