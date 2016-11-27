@@ -9,7 +9,8 @@ var gulp         = require('gulp'),
 	postcss      = require('gulp-postcss'),
 	autoprefixer = require('autoprefixer'),
 	doiuse       = require('doiuse'),
-	mqpacker     = require('css-mqpacker');
+	mqpacker     = require('css-mqpacker'),
+	concat       = require( 'gulp-concat' );
 
 
 
@@ -20,7 +21,7 @@ var gulp         = require('gulp'),
 
 //var path         = require( 'path' );
 //var changed      = require( 'gulp-changed' );
-// var concat       = require( 'gulp-concat' );
+// var
 //var plumber      = require( 'gulp-plumber' );
 // var uglify       = require( 'gulp-uglify' );
 //var requireDir   = require( 'require-dir' );
@@ -51,8 +52,9 @@ var paths = {
 	"scssSrc": "./src/scss/**/*.scss",
 	"scssDir": "./css/",
 
-	// "jsSrc": "./src/js/**/*.js",
-	// "jsDir": "./js/",
+	// js
+	"jsSrc": "./src/js/**/*.js",
+	"jsDir": "./js/",
 
 	// admin widget paths
 	//"admin_scssSrc": "./src/admin/admin-widget/*.scss",
@@ -114,13 +116,13 @@ gulp.task('scss', function(){
 // ------------------------------------------------
 // JS Tasks
 // ------------------------------------------------
-/*
+
 gulp.task( 'js', function() {
 	return gulp.src( paths.jsSrc )
 		.pipe( concat( 'main.js' ) )
 		.pipe( gulp.dest( paths.jsDir ) );
 } );
-
+/*
 gulp.task( 'js-min', ['js'], function() {
 	return gulp.src( paths.jsSrc )
 		.pipe( uglify( {preserveComments: 'license'} ) )
@@ -157,6 +159,7 @@ gulp.task('watch', function(){
 
 gulp.task('default', [
 		'scss',
+		'js',
 		//'watch',
 	],
 	function(){

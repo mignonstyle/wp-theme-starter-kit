@@ -1,0 +1,3 @@
+/**
+ * Main common js file
+ */
