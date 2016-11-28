@@ -10,17 +10,14 @@ var gulp         = require('gulp'),
 	autoprefixer = require('autoprefixer'),
 	doiuse       = require('doiuse'),
 	mqpacker     = require('css-mqpacker'),
-	concat       = require('gulp-concat'),
-	uglify       = require('gulp-uglify'),
 	watch        = require('gulp-watch'),
 	plumber      = require('gulp-plumber'),
-	browserSync  = require( 'browser-sync' );
-
-
-
-
-
-
+	stylish      = require('jshint-stylish'),
+	runSequence  = require('run-sequence'),
+	concat       = require('gulp-concat'),
+	uglify       = require('gulp-uglify'),
+	jshint       = require('gulp-jshint'),
+	browserSync  = require('browser-sync');
 
 //var path         = require( 'path' );
 //var changed      = require( 'gulp-changed' );
@@ -48,19 +45,19 @@ var browsers = [
 // Paths setting
 // ------------------------------------------------
 var paths = {
-	// base paths
-	"phpSrc": "./**/*.php",
-
+	'root'   : './',
+	// php
+	'phpSrc' : './**/*.php',
 	// scss
-	"scssSrc": "./src/scss/**/*.scss",
-	"scssDir": "./css/",
-
+	'scssSrc': './src/scss/**/*.scss',
+	// css
+	'scssDir': './css/',
 	// js
-	"jsSrc": "./src/js/**/*.js",
-	"jsDir": "./js/",
+	'jsSrc'  : './src/js/**/*.js',
+	'jsDir'  : './js/',
 
 	// admin widget paths
-	//"admin_scssSrc": "./src/admin/admin-widget/*.scss",
+	//'admin_scssSrc': './src/admin/admin-widget/*.scss',
 
 	//"widget_scssSrc": "./src/admin/admin-widget/widget-scss/**/*.scss",
 	//"widget_scssDir": "./admin/widget/widget-css/",
@@ -72,18 +69,21 @@ var paths = {
 // ------------------------------------------------
 // BrowserSync
 // ------------------------------------------------
-
-gulp.task( 'browser-sync', function() {
-	browserSync.init( {
+gulp.task('browser-sync', function(){
+	browserSync.init({
 		proxy : "http://vccw-test.dev/",
 		notify: true,
 		xip   : false
-	} );
-} );
+	});
+});
 
-gulp.task( 'bs-reload', function() {
-	browserSync.reload();
-} );
+gulp.task('bs-reload', function(){
+	return gulp.src(paths.root)
+		.pipe(browserSync.reload({
+			stream: true,
+			once: true
+		}));
+});
 
 // ------------------------------------------------
 // Sass Tasks
@@ -128,14 +128,21 @@ gulp.task('scss', function(){
 // JS Tasks
 // ------------------------------------------------
 
-gulp.task('js-concat', function(){
+gulp.task('jshint', function(){
+	return gulp.src(paths.jsSrc)
+		.pipe(jshint())
+		.pipe(jshint.reporter('jshint-stylish'))
+		.pipe(jshint.reporter('fail'));
+});
+
+gulp.task('js-concat', function(cb){
 	return gulp.src(paths.jsSrc)
 		.pipe(plumber())
 		.pipe(concat('main.js'))
 		.pipe(gulp.dest(paths.jsDir));
 });
 
-gulp.task('js-min', ['js-concat'], function(){
+gulp.task('js-min', function(){
 	return gulp.src(paths.jsSrc)
 		.pipe(plumber())
 		.pipe(uglify({preserveComments: 'license'}))
@@ -143,7 +150,9 @@ gulp.task('js-min', ['js-concat'], function(){
 		.pipe(gulp.dest(paths.jsDir));
 });
 
-gulp.task('js', ['js-concat', 'js-min']);
+gulp.task('js', function(cb){
+	runSequence('jshint', 'js-concat', 'js-min', cb);
+});
 
 // ------------------------------------------------
 // Gulp Tasks
@@ -180,8 +189,8 @@ gulp.task('watch', [
 
 gulp.task('default', [
 		'scss',
-		'js'
-		//'watch',
+		'js',
+		'watch',
 	],
 	function(){
 });
