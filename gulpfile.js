@@ -19,14 +19,6 @@ var gulp         = require('gulp'),
 	jshint       = require('gulp-jshint'),
 	browserSync  = require('browser-sync');
 
-//var path         = require( 'path' );
-//var changed      = require( 'gulp-changed' );
-
-
-//
-//var requireDir   = require( 'require-dir' );
-
-
 // ------------------------------------------------
 // Auto-polyfill
 // Corrective action due to travis error in autoprefixer.
@@ -127,7 +119,6 @@ gulp.task('scss', function(){
 // ------------------------------------------------
 // JS Tasks
 // ------------------------------------------------
-
 gulp.task('jshint', function(){
 	return gulp.src(paths.jsSrc)
 		.pipe(jshint())
@@ -157,26 +148,6 @@ gulp.task('js', function(cb){
 // ------------------------------------------------
 // Gulp Tasks
 // ------------------------------------------------
-/*
-gulp.task( 'watch', [
-	'scss',
-	'js',
-	'js-min',
-	'browser-sync',
-	'bs-reload'
-], function() {
-	gulp.watch( [paths.scssSrc], ['scss'] );
-	gulp.watch( [paths.jsSrc], ['js', 'js-min'] );
-
-	gulp.watch( [
-		paths.phpSrc,
-		paths.scssSrc,
-		paths.jsSrc,
-	 ], function() {
-		browserSync.reload();
-	} );
-} );
-*/
 gulp.task('watch', [
 		'scss',
 		'js',
@@ -194,13 +165,3 @@ gulp.task('default', [
 	],
 	function(){
 });
-
-/*
-gulp.task( 'default', [
-	'scss',
-	'js',
-	'js-min',
-	//'watch'
-	], function() {
-} );
-*/
