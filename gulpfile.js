@@ -29,8 +29,8 @@ require('es6-promise').polyfill();
 // Browsers setting
 // ------------------------------------------------
 var browsers = [
-	'last 2 version',
-	'> 3%'
+	'last 1 version',
+	'> 50%'
 ];
 
 // ------------------------------------------------
@@ -41,9 +41,11 @@ var paths = {
 	// php
 	'phpSrc' : './**/*.php',
 	// scss
-	'scssSrc': './src/scss/**/*.scss',
+	//'scssSrc': './src/scss/**/*.scss',
+	'scssSrc': './sass/*.scss',
 	// css
-	'scssDir': './css/',
+	//'scssDir': './css/',
+	'scssDir': './',
 	// js
 	'jsSrc'  : './src/js/**/*.js',
 	'jsDir'  : './js/',
@@ -109,11 +111,13 @@ gulp.task('scss', function(){
 		.pipe(gulp.dest(paths.scssDir))
 
 		// add minify
+		/*
 		.pipe(rename({
 			suffix: '.min'
 		}))
 		.pipe(csso())
 		.pipe(gulp.dest(paths.scssDir));
+		*/
 });
 
 // ------------------------------------------------

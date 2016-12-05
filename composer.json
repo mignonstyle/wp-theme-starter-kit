@@ -22,7 +22,7 @@
     ],
     "test": [
       "php vendor/bin/phpcs -p -s -v -n . --standard=./rulesets/phpcs.ruleset.xml --extensions=php",
-      "phpmd sample.php text ./rulesets/phpmd.ruleset.xml"
+      "phpmd 404.php,archive.php,comments.php,footer.php,functions.php,header.php,inc,index.php,layouts,page.php,search.php,sidebar.php,single.php,template-parts text ./rulesets/phpmd.ruleset.xml"
     ]
   }
 }
