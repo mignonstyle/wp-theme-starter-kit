@@ -12,11 +12,12 @@ var gulp         = require('gulp'),
 	mqpacker     = require('css-mqpacker'),
 	watch        = require('gulp-watch'),
 	plumber      = require('gulp-plumber'),
+	jscs         = require('gulp-jscs'),
+	jshint       = require('gulp-jshint'),
 	stylish      = require('jshint-stylish'),
 	runSequence  = require('run-sequence'),
 	concat       = require('gulp-concat'),
 	uglify       = require('gulp-uglify'),
-	jshint       = require('gulp-jshint'),
 	browserSync  = require('browser-sync');
 
 // ------------------------------------------------
@@ -123,6 +124,12 @@ gulp.task('scss', function(){
 // ------------------------------------------------
 // JS Tasks
 // ------------------------------------------------
+gulp.task('jscs', function () {
+	return gulp.src(paths.jsSrc)
+		.pipe(jscs())
+		.pipe(jscs.reporter());
+});
+
 gulp.task('jshint', function(){
 	return gulp.src(paths.jsSrc)
 		.pipe(jshint())
@@ -146,7 +153,7 @@ gulp.task('js-min', function(){
 });
 
 gulp.task('js', function(cb){
-	runSequence('jshint', 'js-concat', 'js-min', cb);
+	runSequence('jscs', 'jshint', 'js-concat', 'js-min', cb);
 });
 
 // ------------------------------------------------
